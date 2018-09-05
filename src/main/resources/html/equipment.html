@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>充电桩管理</title>
+    <link href="static/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="static/css/other/font-awesome.min.css" rel="stylesheet"/>
+    <link href="static/css/other/animate.min.css" rel="stylesheet"/>
+    <link href="static/css/other/style.min.css?v=4.1.0" rel="stylesheet"/>
+    <link href="static/css/plugins/iCheck/custom.css" rel="stylesheet"/>
+    <link href="static/css/bootstrap/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="static/css/bootstrap/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <link href="static/css/select.css" rel="stylesheet"/>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>充电桩</h5>
+                </div>
+                <div class="ibox-content">
+                    <!-- 查询工具栏 -->
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <select id="chargingStationID" name="chargingStationID" class="selectpicker" data-live-search="true" title="充电站" onchange="change('#chargingStationID','#equipmentID',getEquipmentName)">
+                            </select>
+                        </div>
+                        <div id="equipmentIDDiv" class="form-group" hidden="hidden">
+                            <select id="equipmentID" name="equipmentID" class="selectpicker" data-live-search="true" title="充电桩" hidden="hidden">
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="search()" >
+                            <img src="static/images/search_btn.png" height="16" width="16"/> 查询
+                        </button>
+                        <button type="button" class="btn btn-sm" onclick="searchReset()" >
+                            <img src="static/images/reset_btn.png" height="16" width="16"/> 重置
+                        </button>
+                    </div>
+                    <hr/>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="showSave()">
+                        <img src="static/images/add_btn.png" height="16" width="16"/> 添加
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="delConfirm()">
+                        <img src="static/images/delete_btn.png" height="16" width="16"/> 删除
+                    </button>
+                    <table id="equipmentTable"></table>
+                    <div class="modal inmodal" id="save" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated bounceInRight">
+                                <div class="modal-header">
+                                    <button type="button" class="close" onclick="closeSave()">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">关闭</span>
+                                    </button>
+                                    <h4 class="modal-title">充电桩添加</h4>
+                                </div>
+                                <div class="modal-footer" style="text-align: left">
+                                    <form id="saveForm">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="saveChargingStationID">站名称</label>
+                                                    <select id="saveChargingStationID" name="saveChargingStationID" required="" class="selectpicker" data-live-search="true" title="站名称"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="saveEquipmentName">桩名称</label>
+                                                    <input id="saveEquipmentName" name="saveEquipmentName" type="text" required="" class="form-control" maxlength="100" placeholder="桩名称" title="桩名称"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" >
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="saveEquipmentID">桩编号</label>
+                                                    <input id="saveEquipmentID" name="saveEquipmentID" type="text" required="" class="form-control" maxlength="20" placeholder="桩编号" title="桩编号"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="saveEquipmentType">桩类型</label>
+                                                    <input id="saveEquipmentType" name="saveEquipmentType" type="text" class="form-control" maxlength="50" placeholder="桩类型" title="桩类型"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="saveEquipmentManufacturer">厂家</label>
+                                                    <input id="saveEquipmentManufacturer" name="saveEquipmentManufacturer" type="text" class="form-control" maxlength="255" placeholder="厂家" title="厂家"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="saveManufactureDateTime">生产日期</label>
+                                                    <input id="saveManufactureDateTime"  name="saveManufactureDateTime" class="form-control layer-date pop-date" placeholder="生产日期" title="生产日期" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="saveEquipmentPowerType">桩型号</label>
+                                                    <input id="saveEquipmentPowerType" name="saveEquipmentPowerType" type="text" class="form-control" maxlength="50" placeholder="桩型号" title="桩型号"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="saveProtocolType">协议类型</label>
+                                                    <input id="saveProtocolType" name="saveProtocolType" type="text" class="form-control" maxlength="50" placeholder="协议类型" title="协议类型"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="saveEquipmentBatch">批次</label>
+                                                    <input id="saveEquipmentBatch" type="text" class="form-control" name="saveEquipmentBatch" maxlength="50" placeholder="批次" title="批次"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12" style="text-align: right">
+                                            <button type="button" class="btn" onclick="closeSave()">
+                                                <img src="static/images/close_btn.png" height="16" width="16"/> 关闭
+                                            </button>
+                                            <button type="button" class="btn btn-primary" onclick="save()">
+                                                <img src="static/images/save_btn.png" height="16" width="16"/> 保存
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="static/js/jquery/jquery.min.js"></script>
+
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/bootstrap/bootstrap-table.js"></script>
+<script src="static/js/bootstrap/bootstrap-table-zh-CN.min.js"></script>
+<script src="static/js/bootstrap/bootstrap-select.min.js"></script>
+
+<script src="static/js/plugins/iCheck/icheck.min.js"></script>
+<script src="static/js/plugins/layer/laydate/laydate.js"></script>
+<script src="static/js/plugins/layer/layer.min.js"></script>
+<script src="static/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="static/js/plugins/sweetalert/sweetalert-dev.js"></script>
+
+<script src="static/js/other/content.min.js?v=1.0.0"></script>
+<script src="static/js/other/contabs.min.js"></script>
+
+<script src="static/js/common.js"></script>
+<script src="static/js/equipment/equipment.js"></script>
+<script src="static/js/equipment/equipmentOperate.js"></script>
+<script src="static/js/messageContent.js"></script>
+
+</body>
+
+</html>

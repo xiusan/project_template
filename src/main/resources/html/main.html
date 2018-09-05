@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>项目菜单</title>
+    <link rel="shortcut icon" type="image/x-icon" href="static/images/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"/>
+    <link href="static/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="static/css/other/font-awesome.min.css" rel="stylesheet"/>
+    <link href="static/css/other/animate.min.css" rel="stylesheet"/>
+    <link href="static/css/other/style.min.css?v=4.1.0" rel="stylesheet"/>
+    <link href="static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet"/>
+
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<input id="systemTime" name = "systemTime" hidden = "hidden"/>
+<div id="wrapper" style="background-color: #F1F5F8;">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <!--<li class="nav-header" style="background: url(static/images/background_menu.png);background-size: cover;">-->
+                <li class="nav-header">
+                    <div class="dropdown profile-element" style="font-size: 21px;">
+                        <span class="text-muted text-xs block" style="color: white;">NEW项目</span>
+                    </div>
+                    <div class="logo-element">NEW</div>
+                </li>
+                <li>
+                    <a href="home.html" data-index="0" class="J_menuItem">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">首页</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="equipment">
+                        <img  style="height: 15px;width: 14px;margin-right: 6px;" src="static/images/equipment_menu.png" />
+                        <span class="nav-label" id="equipmentMenu">充电桩管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-edit"></i>
+                        <span class="nav-label">设置</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="">默认设置</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="user">账户设置</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="hidden-xs">
+                        <a href="" class="J_menuItem">
+                            <i id="time"></i>
+                        </a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="" class="J_menuItem">
+                            <img src="static/images/user.png" style="height:20px;width:20px;"/>
+                        </a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="" class="J_menuItem">
+                            <i id="userName">你好！</i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row content-tabs">
+            <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+            </button>
+            <nav class="page-tabs J_menuTabs">
+                <div class="page-tabs-content">
+                    <a href="javascript:;" class="active J_menuTab" data-id="home.html">首页</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+            </button>
+            <div class="btn-group roll-nav roll-right">
+                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span></button>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a>定位当前页面</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a>关闭全部页面</a>
+                    </li>
+                    <li class="J_tabCloseOther"><a>关闭其他页面</a>
+                    </li>
+                </ul>
+            </div>
+            <a href="#" class="roll-nav roll-right J_tabExit" onclick="logoutConfirm()"><i class="fa fa fa-sign-out"></i> 退出</a>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="home.html" frameborder="0" data-id="home.html" seamless="true"></iframe>
+        </div>
+    </div>
+</div>
+
+<script src="static/js/jquery/jquery.min.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="static/js/plugins/layer/layer.min.js"></script>
+<script src="static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="static/js/plugins/pace/pace.min.js"></script>
+<script src="static/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="static/js/plugins/sweetalert/sweetalert-dev.js"></script>
+<script src="static/js/other/hplus.min.js"></script>
+<script src="static/js/other/contabs.min.js"></script>
+<script src="static/js/common.js"></script>
+<script src="static/js/messageContent.js"></script>
+<script src="static/js/main.js"></script>
+
+</body>
+
+</html>

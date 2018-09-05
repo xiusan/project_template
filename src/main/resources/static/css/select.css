@@ -1,0 +1,31 @@
+.select.active,
+.select:active,
+.select:focus,
+.select:hover,
+.open  .dropdown-toggle.select,
+.open  .dropdown-toggle.select:hover{
+    background-color: #ffffff;
+    border-color: #1ab394;
+    color: #000;
+}
+.btn-select {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn-select.active,
+.btn-select:active,
+.btn-select:focus,
+.btn-select:hover,
+.open  .dropdown-toggle.btn-select,
+.open  .dropdown-toggle.btn-select:hover{
+    background-color: #ffffff;
+    border-color: #1ab394;
+    color: #000;
+}
+.pop-select{
+    height: 33px;
+}
+.pop-date{
+    height: 35px;
+}
